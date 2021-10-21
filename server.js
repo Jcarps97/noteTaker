@@ -15,12 +15,12 @@ app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 
-//Pulling Note history
+//Pulling Note history - this route needs to be moved to seperate file and required in
 app.get('/api/notes', (req, res) => {
     res.json(allNotes);
 });
 
-//Creating new notes
+//Creating new notes - this route needs to be moved to seperate file and required in
 app.post('/api/notes', (req, res) =>{
     if (req.body) {
         readAndAppend(req.body, './db/db.json');
