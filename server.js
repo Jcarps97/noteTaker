@@ -3,7 +3,9 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3001;
 const { readAndAppend } = require("./utils/fsUtils");
-let allNotes = require("./db/db.json");
+// let allNotes = require("./db/db.json");
+const apiRoutes = require("./routes");
+// const addNotes = require("./routes/addNote")
 
 //Baseline code that should be used in all call files
 app.use(express.json());
@@ -16,20 +18,21 @@ app.get('/notes', (req, res) => {
 });
 
 //Pulling Note history - this route needs to be moved to seperate file and required in
-app.get('/api/notes', (req, res) => {
-    res.json(allNotes);
-});
+// app.get('/api/notes', (req, res) => {
+//     res.json(allNotes);
+// });
+app.use('/api', apiRoutes);
 
 //Creating new notes - this route needs to be moved to seperate file and required in
-app.post('/api/notes', (req, res) =>{
-    if (req.body) {
-        readAndAppend(req.body, './db/db.json');
-        res.json('Note added successfully');
-        //Side column does not update
-    } else {
-        res.json('Error, cannot add note');
-    }
-});
+// app.post('/api/notes', (req, res) =>{
+//     if (req.body) {
+//         readAndAppend(req.body, './db/db.json');
+//         res.json('Note added successfully');
+//     } else {
+//         res.json('Error, cannot add note');
+//     }
+// });
+// app.use('/addNote', addNotes )
 
 //Wildcard call
 app.get('*', (req, res) => {
